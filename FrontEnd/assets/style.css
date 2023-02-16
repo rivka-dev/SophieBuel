@@ -47,11 +47,15 @@ table {
 	border-collapse: collapse;
 	border-spacing: 0;
 }
-
-body {
-	
+#container{
 	max-width: 1140px;
-	margin:auto;
+
+}
+body {
+	display:flex;
+
+	align-items:center;
+	flex-direction:column;
 	font-family: 'Work Sans' ;
 	font-size: 14px;
 	background:  #FFFEF8;
@@ -131,6 +135,7 @@ a:hover {
 #portfolio h2 {
 	text-align: center;
 	margin-bottom: 1em;
+	position:relative
 }
 #flexFiltres{
 	display: flex;
@@ -164,7 +169,7 @@ margin: auto;
 #contact h2 , #login h2{
 	margin-bottom: 20px;
 }
-#contact form , #login form{
+form{
 	text-align: left;
 	margin-top:30px;
 	display: flex;
@@ -172,13 +177,16 @@ margin: auto;
 }
 
 #contact input , #login input, .js-modal.vert{
-	height: 50px;
+	display:flex;
+	align-items:center;
+	height:36px;
 	font-size: 1.2em;
 	border: none;
 	box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
-	padding-bottom:15.5px;
-	padding-top:15.5px;
+	padding-right:50px;
+	padding-left:50px;
 	text-decoration: none;
+	
 }
 #contact label ,#login label{
 	margin: 2em 0 1em 0;
@@ -199,11 +207,13 @@ input[type="submit"], .vert:focus-within,  .vert{
 	font-weight: 700;
 	color: white;
 	background-color: #1D6154;
-	margin : 2em auto ;
-	width: 180px;
+	margin : 2em auto ;	
 	text-align: center;
 	border-radius: 60px ;
 	
+}
+.filtres *{
+	width:180px;
 }
 .centre{
 	text-align:center;
@@ -219,6 +229,7 @@ input[type="submit"], .vert:focus-within,  .vert{
 footer{
 	background: #FFF;
 	padding-bottom: 20px;
+	width:100%;
 	
 
 }
@@ -236,19 +247,28 @@ footer nav ul {
 *:focus{
     box-shadow: 0 0 10px blue
 }
+
 /*modal*/
+.premiere{
+	position:absolute;
+	z-index: 0;
+	top:550px;
+}
+.seconde{
+	position: relative;
+	z-index: 1;
+	top:-59px;
+	
+}
 .modal{
     display:flex;
     align-items:center;
-    justify-content:center;
-    position:fixed;
-    top:200px;
+    justify-content:center;      
     left:0;
     width:100%;
-    background:100%;
-   
+    background:100%;   
     animation: fadeIn .3s both;
-
+	
 }
 
 .modal-wrapper{
@@ -259,29 +279,43 @@ footer nav ul {
     padding:20px;
     background-color: #FFF;
     animation: slideFromTop .3s both ;
+	padding:50px;
+	height:800px;
 }
 .modal[aria-hidden="true"]{
     animation-name:fadeOut ;
 }
 .modal[aria-hidden="true"] .modal-wrapper{
-    animation-name:slideToBottom;
-	
+    animation-name:slideToBottom;	
 }
 .galleryModal{
 	width: 100%;
 	display: grid;
 	grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-	grid-column-gap: 10px;
+	grid-column-gap: 5px;
 	grid-row-gap: 20px;
+	padding-bottom: 50px;
+	border-bottom: 1px solid #B3B3B3;	
+	place-items: center;
+	
+		
+	top:100px;
+	
 }
 
-.galleryModal *{
-	width:80px;
-}
+
 .flexModal{
 	display:flex;
 	flex-direction:column;
 	justify-content: center;
+}
+.flexHautModal{
+	display:flex;
+	justify-content: end;
+}
+.js-modal-close{
+	background:none;
+	border:none;
 }
 .modification{
 	display:flex;
@@ -292,6 +326,90 @@ footer nav ul {
 .modification a, .modification i{
 	padding-left:5px;
 }
+.modification-modal{
+	position:relative;
+	left:20px;
+
+}
+figureModale{
+	position:relative;
+}
+.imgModale{
+		width:80px;
+		
+		
+		
+		
+	
+}
+.noir{	
+		position: absolute;
+		z-index: 2;		
+		height:17px;
+		width:17px;
+		background:black;	
+		display:flex;
+		justify-content: center;
+		align-items: center;
+		border:black;
+		margin-top:7px;
+	}
+	.fleche{
+		visibility:hidden;
+	}
+ 	.figureModale:hover .fleche{
+		margin-left:35px;
+		visibility:visible;
+	}
+	.supprimer{
+		margin-left:58px;
+	}
+	/*modale2*/
+	#photo, #disparait{
+		height: 190px;
+		background: #E8F1F7;
+		border-radius: 3px;
+		display:flex;
+		flex-direction: column;
+		align-items:center;		
+		margin-bottom:25px;
+
+	}
+	
+	#photoBtn{
+		background: #CBD6DC;
+		border-radius: 50px;
+		margin : 21px auto 10px auto ;	
+		text-align: center;
+		font-weight:500;
+		font-size:14px;
+		padding: 10px 50px;
+		border:none;
+		color:#306685
+	}
+	#labelPhoto{
+		font-weight:400;
+		font-size:10px;
+	}
+	.champs{
+		height:51px;
+		background:#FFF;
+		box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.09);
+		border:none;
+		margin-top:10px;
+		margin-bottom:20px;
+	}
+	.champsEntree{
+		padding-bottom: 50px;
+		border-bottom: 1px solid #B3B3B3;
+		display:flex;
+		flex-direction:column;
+	}
+	#output{
+		
+		height:190px;
+		margin:0px;
+	}
 
 @keyframes fadeIn {
     from {opacity: 0;}

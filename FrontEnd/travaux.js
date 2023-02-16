@@ -28,8 +28,9 @@ async function works(){
     //ajout du listener pour n'afficher que les objets
     const boutonFiltre=(filtre, numero)=> {        
         filtre.addEventListener("click",function(){          
-            const travauxFiltre=travaux.filter(function (travail){
-                return travail.category.id==numero;                
+            const travauxFiltre=travaux.filter(function (travail){                
+                return travail.category.id==numero;
+                              
             });
             //Effacement de l'écran et regénération de la page
             document.querySelector(".gallery").innerHTML="";
@@ -46,7 +47,8 @@ async function works(){
     boutonTous.addEventListener("click",function(){    
         document.querySelector(".gallery").innerHTML="";
         genererTravaux(travaux);
-    })  
+    }) 
+    
 }
 
 

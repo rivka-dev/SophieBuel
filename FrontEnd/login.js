@@ -1,8 +1,8 @@
 async function connexion(){
   let login={
     "email": "string",
-      "password": "string"
-}
+    "password": "string"
+  }
   // Création de l’objet du login.
   const submitLogin=document.querySelector("#connexion")
   submitLogin.addEventListener("click", async function(event){      
@@ -18,21 +18,16 @@ async function connexion(){
       },
       body: JSON.stringify(login)
     })
-
     let result = await response.json()
 //reponse positive ou negative
     if (response.status === 200) {
       tokenLogin=result.token
       window.location.replace('index.html');
       window.localStorage.setItem("token", result.token);
-  } else  {
-      alert("erreur!")
-      
+    } else  {
+      alert("Erreur dans l'identifiant ou le mot de passe")
+   }  
   }
-  
-}
-    
-       
-  )}
+)}
 connexion()
 

@@ -2,16 +2,16 @@ let modal=null
 const focusableSelector="button, a, input, textarea"
 let focusables=[]
 let previouslyFocusedElement=null
+let image=document.querySelector("#getFile")
 
 const openModal= async function(e){
     e.preventDefault()
-    const target=e.target.getAttribute('href')
-    if (target.startsWith ('#')){
-        modal=document.querySelector(target)
-    }else{
+    const target=e.target.getAttribute("href")
+    if (target.startsWith ("#")){
+        modal=document.querySelector(target) 
+    }   else{
         modal= await loadModal(target)
-    }
-    
+    }    
     focusables=Array.from(modal.querySelectorAll(focusableSelector))
     previouslyFocusedElement=document.querySelector(':focus')
     modal.style.display=null
@@ -20,18 +20,23 @@ const openModal= async function(e){
     modal.setAttribute('aria-modal','true')
     modal.addEventListener('click',closeModal)  
     modal.querySelector('.js-modal-close').addEventListener ('click',closeModal)
-    modal.querySelector('.js-modal-stop').addEventListener ('click',stopPropagation)
+    modal.querySelector('.js-modal-stop').addEventListener ('click',stopPropagation)  
+    image.value=""
+    console.log(image.value) 
+    image = document.querySelector("#getFile");
+console.log(image.value)
+/*if (image.value!==""){  
+    const imageElement = document.createElement("img")
+    imageElement.src = image.value  
+    const divPhoto=document.querySelector("#photo")
+    divPhoto.innerHTML=""
+    divPhoto.appendChild(imageElement)
+    }*/
 }
 const closeModal=function (e){
     if(modal===null) return
     if(previouslyFocusedElement!==null) previouslyFocusedElement.focus()
-    e.preventDefault()
-   /* Animation-direction reversed
-   modal.style.display="none"
-   modal.offsetWidth
-   modal.style.display=null
-   */
-   
+    e.preventDefault()   
     modal.setAttribute('aria-hidden','true')
     modal.removeAttribute('aria-modal')
     modal.removeEventListener('click',closeModal)
@@ -43,11 +48,13 @@ const closeModal=function (e){
         modal=null
     }
     modal.addEventListener('animationend',hideModal)
+    
 }
+//garde la modale ouverte quand on clique dessus
 const stopPropagation=function (e){
     e.stopPropagation()
 }
-
+//garde la tabulation à l'intérieur de la modale
 const focusInModal= function(e){
     e.preventDefault()
     let index=focusables.findIndex(f => f === modal.querySelector(':focus'))
@@ -64,8 +71,7 @@ const focusInModal= function(e){
     }
     focusables[index].focus()
 }
-const loadModal= async function (url){
-    
+const loadModal= async function (url){    
     const target ='#' +url.split('#')[1]
     const existingModal=document.querySelector(target)
     if (existingModal!==null)return existingModal
@@ -77,15 +83,32 @@ const loadModal= async function (url){
 
 document.querySelectorAll('.js-modal').forEach(a =>{
     a.addEventListener('click',openModal)
-
+})
+window.addEventListener('mouseup', function(e){
+    var obj = document.querySelector(".premiere");
+    var obj2= document.querySelector(".seconde")
+    console.log(obj)
+    console.log(e.target)
+    if (!obj.contains(e.target)&&!obj2.contains(e.target)) {
+        closeModal(e)
+    }
 })
 window.addEventListener('keydown', function(e){
-   if (e.key==='Escape'||e.key==='Esc'){
-    closeModal(e)
-   }
-   if(e.key==='Tab' && modal!==null){
-    focusInModal(e)
-   }
+    if(e.key==='Tab' && modal!==null){
+        console.log("ecran")
+     focusInModal(e)
+    }
+ })
 
+ var loadFile = function(event) {
+    
+	var image = document.getElementById('output');
+	image.src = URL.createObjectURL(event.target.files[0]);
+    document.getElementById('disparait').style.display = 'none';
+  
+ 
 
-})
+};
+
+ 
+ 
